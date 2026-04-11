@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { supabase } from "../lib/supabase";
 
 /* ──────────────────────────────────────────────
    Scroll-triggered fade-in hook
@@ -110,13 +111,29 @@ export default function Home() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
-  async function handleSubmit(e: React.FormEvent) {
+async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!email || submitting) return;
     setSubmitting(true);
-    // TODO: wire to Supabase
-    await new Promise((r) => setTimeout(r, 800));
-    setSubmitted(true);
+    try {
+      const { error } = await supabase
+        .from("waitlist")
+        .insert({ email: email.toLowerCase().trim() });
+      if (error) {
+        if (error.code === "23505") {
+          // duplicate email — treat as success
+          setSubmitted(true);
+        } else {
+          alert("Something went wrong. Please try again.");
+          console.error(error);
+        }
+      } else {
+        setSubmitted(true);
+      }
+    } catch (err) {
+      alert("Something went wrong. Please try again.");
+      console.error(err);
+    }
     setSubmitting(false);
   }
 
