@@ -919,7 +919,7 @@ async function handleSubmit(e: React.FormEvent) {
             GitHub
           </a>
           <a
-            hhref="https://x.com/RevHoundApp"
+            href="https://x.com/RevHoundApp"
             target="_blank"
             rel="noopener noreferrer"
             className="font-mono"
