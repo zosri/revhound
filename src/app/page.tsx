@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { supabase } from "../lib/supabase";
+import { supabase } from "@/lib/supabase";
 
 /* ──────────────────────────────────────────────
    Scroll-triggered fade-in hook
@@ -919,7 +919,7 @@ async function handleSubmit(e: React.FormEvent) {
             GitHub
           </a>
           <a
-            href="https://x.com/RevHoundApp"
+            href="https://x.com"
             target="_blank"
             rel="noopener noreferrer"
             className="font-mono"
