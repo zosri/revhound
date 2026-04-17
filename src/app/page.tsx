@@ -87,9 +87,9 @@ const buildLog = [
     desc: "Naming, branding, landing page. RevHound is born.",
   },
   {
-    date: "Coming",
-    title: "Waitlist + first blog post",
-    desc: '"Your App Store revenue is wrong. Here\'s the math."',
+    date: "Apr 2026",
+    title: "Waitlist live + custom domain",
+    desc: "Waitlist connected to Supabase. revhound.dev is live.",
   },
   {
     date: "Coming",
@@ -718,15 +718,15 @@ async function handleSubmit(e: React.FormEvent) {
                     height: 12,
                     borderRadius: "50%",
                     background:
-                      i === 0 ? "var(--accent)" : "var(--border)",
-                    border: `2px solid ${i === 0 ? "var(--accent)" : "var(--border)"}`,
+                      i <= 1 ? "var(--accent)" : "var(--border)",
+                    border: `2px solid ${i <= 1 ? "var(--accent)" : "var(--border)"}`,
                   }}
                 />
                 <p
                   className="font-mono"
                   style={{
                     fontSize: 12,
-                    color: i === 0 ? "var(--accent)" : "var(--muted)",
+                    color: i <= 1 ? "var(--accent)" : "var(--muted)",
                     marginBottom: 4,
                   }}
                 >
@@ -919,7 +919,7 @@ async function handleSubmit(e: React.FormEvent) {
             GitHub
           </a>
           <a
-            href="https://x.com"
+            href="https://x.com/RevHoundApp"
             target="_blank"
             rel="noopener noreferrer"
             className="font-mono"
@@ -937,6 +937,24 @@ async function handleSubmit(e: React.FormEvent) {
             }
           >
             X/Twitter
+          </a>
+          <a
+            href="mailto:revhound@revhound.dev"
+            className="font-mono"
+            style={{
+              fontSize: 13,
+              color: "var(--muted)",
+              textDecoration: "none",
+              transition: "color 0.2s",
+            }}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.color = "var(--text)")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.color = "var(--muted)")
+            }
+          >
+            Contact
           </a>
         </div>
       </footer>
