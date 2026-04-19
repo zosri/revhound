@@ -111,7 +111,7 @@ export default function Home() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
-async function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!email || submitting) return;
     setSubmitting(true);
@@ -121,7 +121,6 @@ async function handleSubmit(e: React.FormEvent) {
         .insert({ email: email.toLowerCase().trim() });
       if (error) {
         if (error.code === "23505") {
-          // duplicate email — treat as success
           setSubmitted(true);
         } else {
           alert("Something went wrong. Please try again.");
@@ -760,32 +759,57 @@ async function handleSubmit(e: React.FormEvent) {
             Blog
           </p>
           <h2 style={{ fontSize: 28, fontWeight: 600, marginBottom: 32 }}>
-            Coming soon
+            Latest
           </h2>
 
-          <div
+          <a
+            href="/blog/why-im-building-revhound"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <div
+              style={{
+                background: "var(--bg-card)",
+                border: "1px solid var(--border)",
+                borderRadius: 8,
+                padding: "28px",
+                transition: "border-color 0.2s",
+              }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.borderColor = "var(--accent)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.borderColor = "var(--border)")
+              }
+            >
+              <p
+                className="font-mono"
+                style={{ fontSize: 12, color: "var(--accent)", marginBottom: 8 }}
+              >
+                behind the build · 4 min read
+              </p>
+              <h3 style={{ fontSize: 20, fontWeight: 600 }}>
+                Your Revenue Dashboard Is Lying to You
+              </h3>
+              <p style={{ color: "var(--muted)", marginTop: 8, fontSize: 15 }}>
+                Every platform shows gross revenue. None show what you actually
+                keep. That&apos;s why I&apos;m building RevHound.
+              </p>
+            </div>
+          </a>
+
+          <a
+            href="/blog"
+            className="font-mono"
             style={{
-              background: "var(--bg-card)",
-              border: "1px solid var(--border)",
-              borderRadius: 8,
-              padding: "28px",
-              opacity: 0.6,
+              display: "inline-block",
+              marginTop: 16,
+              fontSize: 14,
+              color: "var(--accent)",
+              textDecoration: "none",
             }}
           >
-            <p
-              className="font-mono"
-              style={{ fontSize: 12, color: "var(--muted)", marginBottom: 8 }}
-            >
-              First post
-            </p>
-            <h3 style={{ fontSize: 20, fontWeight: 600 }}>
-              Your App Store revenue is wrong. Here&apos;s the math.
-            </h3>
-            <p style={{ color: "var(--muted)", marginTop: 8, fontSize: 15 }}>
-              A breakdown of every fee between a customer&apos;s payment and
-              your bank account.
-            </p>
-          </div>
+            All posts →
+          </a>
         </section>
       </FadeSection>
 
