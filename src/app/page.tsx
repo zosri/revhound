@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { supabase } from "@/lib/supabase";
+import RevenueCalculator from "@/components/RevenueCalculator";
 
 /* ──────────────────────────────────────────────
    Scroll-triggered fade-in hook
@@ -92,9 +93,29 @@ const buildLog = [
     desc: "Waitlist connected to Supabase. revhound.dev is live.",
   },
   {
+    date: "Apr 2026",
+    title: "First blog post",
+    desc: "Your Revenue Dashboard Is Lying to You. The math behind why every platform overstates your earnings.",
+  },
+  {
+    date: "Apr 2026",
+    title: "Dashboard demo live",
+    desc: "Revenue waterfall, platform breakdown, 6-month trends. Finally see where your money actually goes.",
+  },
+  {
+    date: "Apr 2026",
+    title: "Interactive calculator",
+    desc: "Enter your real numbers, see the gap between gross and net. Try it on the landing page.",
+  },
+  {
     date: "Coming",
     title: "Google Play connector",
     desc: "First platform integration. Real data, real numbers.",
+  },
+  {
+    date: "Coming",
+    title: "Stripe integration",
+    desc: "Connect your Stripe account. Real data, real numbers.",
   },
   {
     date: "Coming",
@@ -106,6 +127,131 @@ const buildLog = [
 /* ──────────────────────────────────────────────
    Page
    ────────────────────────────────────────────── */
+function BuildLog() {
+  const [open, setOpen] = useState(false);
+  const innerRef = useRef<HTMLDivElement>(null);
+  const [height, setHeight] = useState(0);
+
+  useEffect(() => {
+    if (!innerRef.current) return;
+    const ro = new ResizeObserver(() => {
+      if (innerRef.current) setHeight(innerRef.current.scrollHeight);
+    });
+    ro.observe(innerRef.current);
+    setHeight(innerRef.current.scrollHeight);
+    return () => ro.disconnect();
+  }, []);
+
+  return (
+    <section style={{ marginBottom: 100 }}>
+      <p
+        className="font-mono"
+        style={{
+          fontSize: 14,
+          color: "var(--muted)",
+          marginBottom: 12,
+          letterSpacing: "0.1em",
+          textTransform: "uppercase",
+        }}
+      >
+        Build log
+      </p>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: open ? 32 : 0 }}>
+        <h2 style={{ fontSize: 28, fontWeight: 600 }}>Following along</h2>
+        <button
+          onClick={() => setOpen((v) => !v)}
+          className="font-mono"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 6,
+            fontSize: 13,
+            color: "var(--accent)",
+            background: "transparent",
+            border: "1px solid var(--border)",
+            borderRadius: 6,
+            padding: "6px 14px",
+            cursor: "pointer",
+            transition: "border-color 0.2s",
+            fontFamily: "inherit",
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.borderColor = "var(--accent)")}
+          onMouseLeave={(e) => (e.currentTarget.style.borderColor = "var(--border)")}
+        >
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 12 12"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            style={{
+              transition: "transform 0.3s ease",
+              transform: open ? "rotate(180deg)" : "rotate(0deg)",
+            }}
+          >
+            <polyline points="2,4 6,8 10,4" />
+          </svg>
+          {open ? "Collapse" : "Show all"}
+        </button>
+      </div>
+
+      <div
+        style={{
+          overflow: "hidden",
+          maxHeight: open ? height : 0,
+          transition: "max-height 0.45s ease",
+        }}
+      >
+        <div
+          ref={innerRef}
+          style={{
+            borderLeft: "2px solid var(--border)",
+            paddingLeft: 28,
+            display: "flex",
+            flexDirection: "column",
+            gap: 32,
+          }}
+        >
+          {buildLog.map((entry, i) => (
+            <div key={i} style={{ position: "relative" }}>
+              <div
+                style={{
+                  position: "absolute",
+                  left: -35,
+                  top: 6,
+                  width: 12,
+                  height: 12,
+                  borderRadius: "50%",
+                  background: i <= 4 ? "var(--accent)" : "var(--border)",
+                  border: `2px solid ${i <= 4 ? "var(--accent)" : "var(--border)"}`,
+                }}
+              />
+              <p
+                className="font-mono"
+                style={{
+                  fontSize: 12,
+                  color: i <= 4 ? "var(--accent)" : "var(--muted)",
+                  marginBottom: 4,
+                }}
+              >
+                {entry.date}
+              </p>
+              <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 4 }}>
+                {entry.title}
+              </h3>
+              <p style={{ fontSize: 15, color: "var(--muted)" }}>
+                {entry.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function Home() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -219,9 +365,17 @@ export default function Home() {
         </p>
       </section>
 
+      {/* ── Calculator ── */}
+      <FadeSection>
+        <div style={{ marginBottom: 100 }}>
+          <RevenueCalculator />
+        </div>
+      </FadeSection>
+
       {/* ── Waitlist ── */}
       <FadeSection>
         <section
+          id="waitlist"
           style={{
             background: "var(--bg-card)",
             border: "1px solid var(--border)",
@@ -680,67 +834,7 @@ export default function Home() {
 
       {/* ── Build Log ── */}
       <FadeSection>
-        <section style={{ marginBottom: 100 }}>
-          <p
-            className="font-mono"
-            style={{
-              fontSize: 14,
-              color: "var(--muted)",
-              marginBottom: 12,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-            }}
-          >
-            Build log
-          </p>
-          <h2 style={{ fontSize: 28, fontWeight: 600, marginBottom: 32 }}>
-            Following along
-          </h2>
-
-          <div
-            style={{
-              borderLeft: "2px solid var(--border)",
-              paddingLeft: 28,
-              display: "flex",
-              flexDirection: "column",
-              gap: 32,
-            }}
-          >
-            {buildLog.map((entry, i) => (
-              <div key={i} style={{ position: "relative" }}>
-                <div
-                  style={{
-                    position: "absolute",
-                    left: -35,
-                    top: 6,
-                    width: 12,
-                    height: 12,
-                    borderRadius: "50%",
-                    background:
-                      i <= 1 ? "var(--accent)" : "var(--border)",
-                    border: `2px solid ${i <= 1 ? "var(--accent)" : "var(--border)"}`,
-                  }}
-                />
-                <p
-                  className="font-mono"
-                  style={{
-                    fontSize: 12,
-                    color: i <= 1 ? "var(--accent)" : "var(--muted)",
-                    marginBottom: 4,
-                  }}
-                >
-                  {entry.date}
-                </p>
-                <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 4 }}>
-                  {entry.title}
-                </h3>
-                <p style={{ fontSize: 15, color: "var(--muted)" }}>
-                  {entry.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
+        <BuildLog />
       </FadeSection>
 
       {/* ── Blog preview ── */}
