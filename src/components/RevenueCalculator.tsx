@@ -419,14 +419,14 @@ export default function RevenueCalculator() {
               Rev<span style={{ color: "#f0a830" }}>Hound</span>
             </span>
           </div>
-          <h1 style={{
+          <h2 style={{
             fontSize: 28,
             fontWeight: 700,
             lineHeight: 1.3,
             marginBottom: 8,
           }}>
             How much are you <span style={{ color: "#e05544" }}>really</span> keeping?
-          </h1>
+          </h2>
           <p style={{
             color: "#706050",
             fontSize: 15,
