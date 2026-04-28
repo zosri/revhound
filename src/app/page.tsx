@@ -716,6 +716,205 @@ export default function Home() {
         </section>
       </FadeSection>
 
+      {/* ── Detailed Breakdown ── */}
+      <FadeSection>
+        <section style={{ marginBottom: 100 }}>
+          <p
+            className="font-mono"
+            style={{
+              fontSize: 14,
+              color: "var(--muted)",
+              marginBottom: 12,
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+            }}
+          >
+            The full picture
+          </p>
+          <h2
+            style={{ fontSize: 28, fontWeight: 600, marginBottom: 12 }}
+          >
+            €10,000 in sales. €6,847 in your bank.
+          </h2>
+          <p
+            style={{
+              fontSize: 16,
+              color: "var(--muted)",
+              marginBottom: 40,
+              maxWidth: 520,
+              lineHeight: 1.6,
+            }}
+          >
+            A real example: SaaS founder, Stripe, international customers,
+            EU VAT registered. Here&apos;s where the money goes.
+          </p>
+
+          <div
+            style={{
+              background: "var(--bg-card)",
+              border: "1px solid var(--border)",
+              borderRadius: 8,
+              overflow: "hidden",
+            }}
+          >
+            {/* Starting amount */}
+            <div
+              style={{
+                padding: "20px 28px",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                borderBottom: "1px solid var(--border)",
+              }}
+            >
+              <span style={{ fontSize: 15, fontWeight: 600 }}>
+                Gross revenue
+              </span>
+              <span
+                className="font-mono"
+                style={{ fontSize: 18, fontWeight: 700 }}
+              >
+                €10,000.00
+              </span>
+            </div>
+
+            {/* Deductions */}
+            {[
+              {
+                label: "VAT collected (avg 21%)",
+                note: "You never had this money — it\u2019s the tax office\u2019s",
+                amount: "\u2212€1,736.00",
+              },
+              {
+                label: "Stripe processing (2.9% + €0.25)",
+                note: "On the full €10k, before VAT is removed",
+                amount: "\u2212€540.00",
+              },
+              {
+                label: "International card surcharge (+1%)",
+                note: "~60% of your customers pay from outside your country",
+                amount: "\u2212€60.00",
+              },
+              {
+                label: "Currency conversion (1.5% spread)",
+                note: "GBP, USD, PLN → EUR at Stripe\u2019s rate, not the market rate",
+                amount: "\u2212€87.00",
+              },
+              {
+                label: "Refunds & chargebacks (3%)",
+                note: "Plus you lose the original processing fee too",
+                amount: "\u2212€300.00",
+              },
+              {
+                label: "Disputed chargebacks (€15 × 4)",
+                note: "Stripe charges €15 per dispute, win or lose",
+                amount: "\u2212€60.00",
+              },
+              {
+                label: "Failed payment retries",
+                note: "Declined cards that eventually churn — lost revenue",
+                amount: "\u2212€370.00",
+              },
+            ].map((row, i) => (
+              <div
+                key={i}
+                style={{
+                  padding: "16px 28px",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  borderBottom: "1px solid var(--border)",
+                  gap: 16,
+                }}
+              >
+                <div style={{ flex: 1 }}>
+                  <p style={{ fontSize: 14, color: "var(--text)" }}>
+                    {row.label}
+                  </p>
+                  <p
+                    style={{
+                      fontSize: 12,
+                      color: "var(--muted)",
+                      marginTop: 2,
+                    }}
+                  >
+                    {row.note}
+                  </p>
+                </div>
+                <span
+                  className="font-mono"
+                  style={{
+                    fontSize: 15,
+                    color: "var(--danger)",
+                    fontWeight: 600,
+                    flexShrink: 0,
+                  }}
+                >
+                  {row.amount}
+                </span>
+              </div>
+            ))}
+
+            {/* Net result */}
+            <div
+              style={{
+                padding: "24px 28px",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                background: "rgba(240, 168, 48, 0.06)",
+              }}
+            >
+              <div>
+                <p
+                  style={{
+                    fontSize: 16,
+                    fontWeight: 700,
+                    color: "var(--accent)",
+                  }}
+                >
+                  What you actually keep
+                </p>
+                <p
+                  style={{
+                    fontSize: 12,
+                    color: "var(--muted)",
+                    marginTop: 2,
+                  }}
+                >
+                  68.5% of gross — 31.5% disappeared
+                </p>
+              </div>
+              <span
+                className="font-mono"
+                style={{
+                  fontSize: 24,
+                  fontWeight: 700,
+                  color: "var(--accent)",
+                }}
+              >
+                €6,847.00
+              </span>
+            </div>
+          </div>
+
+          <p
+            className="font-mono"
+            style={{
+              marginTop: 20,
+              fontSize: 13,
+              color: "var(--muted)",
+              textAlign: "center",
+              lineHeight: 1.6,
+            }}
+          >
+            Your Stripe dashboard said €10,000. Your bank got €6,847.
+            <br />
+            RevHound shows you why.
+          </p>
+        </section>
+      </FadeSection>
+
       {/* ── How it works ── */}
       <FadeSection>
         <section style={{ marginBottom: 100 }}>
