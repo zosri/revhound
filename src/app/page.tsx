@@ -629,6 +629,93 @@ export default function Home() {
         </section>
       </FadeSection>
 
+      {/* ── Personas ── */}
+      <FadeSection>
+        <section style={{ marginBottom: 100 }}>
+          <p
+            className="font-mono"
+            style={{
+              fontSize: 14,
+              color: "var(--muted)",
+              marginBottom: 12,
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+            }}
+          >
+            Built for
+          </p>
+          <h2
+            style={{ fontSize: 28, fontWeight: 600, marginBottom: 40 }}
+          >
+            Your platform. Your real numbers.
+          </h2>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+            {[
+              {
+                label: "Indie iOS & Android devs",
+                pain: "Apple and Google show you gross sales. They don\u2019t subtract their 15\u201330% cut, the VAT they withhold per country, or the FX loss when they convert to your currency. You see \u20AC8.84 per sale \u2014 you keep \u20AC5.01.",
+                accent: "var(--accent)",
+              },
+              {
+                label: "Shopify & e-commerce sellers",
+                pain: "Shopify Payments takes 2.9% + \u20AC0.30 per transaction. Add currency conversion on international orders, refund losses, and app subscription fees \u2014 your \u201Cprofit\u201D margin is thinner than you think.",
+                accent: "var(--accent)",
+              },
+              {
+                label: "SaaS founders selling internationally",
+                pain: "Stripe\u2019s dashboard shows MRR. It doesn\u2019t show the 2.9% + per-transaction fee, the extra 1% for international cards, VAT you owe in 27 EU countries, or the FX spread on non-EUR payments.",
+                accent: "var(--accent)",
+              },
+            ].map((persona) => (
+              <div
+                key={persona.label}
+                style={{
+                  background: "var(--bg-card)",
+                  border: "1px solid var(--border)",
+                  borderRadius: 8,
+                  padding: "28px 28px",
+                  transition: "border-color 0.2s",
+                }}
+              >
+                <p
+                  className="font-mono"
+                  style={{
+                    fontSize: 14,
+                    fontWeight: 700,
+                    color: persona.accent,
+                    marginBottom: 10,
+                  }}
+                >
+                  {persona.label}
+                </p>
+                <p
+                  style={{
+                    fontSize: 15,
+                    color: "var(--muted)",
+                    lineHeight: 1.7,
+                  }}
+                >
+                  {persona.pain}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <p
+            className="font-mono"
+            style={{
+              marginTop: 24,
+              fontSize: 13,
+              color: "var(--muted)",
+              textAlign: "center",
+            }}
+          >
+            One dashboard for all of them. €9/month.
+          </p>
+        </section>
+      </FadeSection>
+
       {/* ── How it works ── */}
       <FadeSection>
         <section style={{ marginBottom: 100 }}>
