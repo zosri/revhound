@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import RevenueCalculator from "@/components/RevenueCalculator";
@@ -312,12 +313,27 @@ export default function Home() {
         >
           RevHound
         </span>
-        <span
-          className="font-mono"
-          style={{ fontSize: 12, color: "var(--muted)" }}
-        >
-          building in public
-        </span>
+        <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
+          <Link
+            href="/calculator"
+            className="font-mono"
+            style={{
+              fontSize: 13,
+              color: "var(--text)",
+              textDecoration: "none",
+              borderBottom: "1px solid var(--accent)",
+              paddingBottom: 2,
+            }}
+          >
+            Calculator →
+          </Link>
+          <span
+            className="font-mono"
+            style={{ fontSize: 12, color: "var(--muted)" }}
+          >
+            building in public
+          </span>
+        </div>
       </nav>
 
       {/* ── Hero ── */}
@@ -367,8 +383,64 @@ export default function Home() {
 
       {/* ── Calculator ── */}
       <FadeSection>
-        <div style={{ marginBottom: 100 }}>
+        <div style={{ marginBottom: 40 }}>
           <RevenueCalculator />
+        </div>
+      </FadeSection>
+
+      {/* ── Handoff to real calculator ── */}
+      <FadeSection>
+        <div
+          style={{
+            marginBottom: 100,
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <Link
+            href="/calculator"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 14,
+              background: "var(--bg-card)",
+              border: "1px solid var(--border)",
+              borderLeft: "3px solid var(--accent)",
+              borderRadius: 8,
+              padding: "16px 22px",
+              textDecoration: "none",
+              transition: "all 0.2s ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "var(--bg-card-hover)";
+              e.currentTarget.style.transform = "translateY(-1px)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "var(--bg-card)";
+              e.currentTarget.style.transform = "translateY(0)";
+            }}
+          >
+            <span
+              className="font-mono"
+              style={{
+                fontSize: 11,
+                color: "var(--accent)",
+                textTransform: "uppercase",
+                letterSpacing: 1.5,
+              }}
+            >
+              Have real Stripe data?
+            </span>
+            <span
+              style={{
+                fontSize: 15,
+                color: "var(--text)",
+                fontWeight: 600,
+              }}
+            >
+              Drop your CSV →
+            </span>
+          </Link>
         </div>
       </FadeSection>
 
